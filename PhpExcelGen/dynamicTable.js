@@ -92,7 +92,7 @@ $(document).ready(function() {
     });
 
     var table = $('#datatable_import').DataTable({
-        scrollX: true,
+
         dom: 'Blfrtip',
         paging: true,
         lengthMenu: [
