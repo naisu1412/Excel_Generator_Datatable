@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JSON to CSV</title>
+<script src="filedrop-min.js"></script>
+<script src="PapaParse/papaparse.min.js"></script>
+<link href="filedropjs.css" rel="stylesheet">
+</head>
+<body>
+<h1>JSON to CSV</h1>
+<label for="useQuotes">Use Quotes: <input type="checkbox" id="useQuotes"></label>
+<textarea id="dropJSON" readonly>
+Drag & drop JSON file here.
+</textarea>
+<textarea id="csvoutput">
+CSV will show up here
+</textarea>
+<br><a href="csvtojson.html">CSV to JSON</a>
+</body>
+</html>
+
+<script>
+var options = {input: false};
+var dropzone = new FileDrop('dropJSON', options);
+var csvzone = document.getElementById("csvoutput");
+var cbQuotes = document.getElementById("useQuotes");
+
+dropzone.event('send', function (files) {
+  files.each(function (file) {
+    file.readData(
+      createCSV,
+      function(e) { alert('Terrible error!') },
+      'text'
+    )
+  })
+});
+
+function createCSV(str) {
+	var config = {
+		quotes:cbQuotes.checked
+	};
+	dropzone.el.value = str;
+	csvzone.value=Papa.unparse(str,config);
+}
+
+cbQuotes.addEventListener("click",function() {
+	if (dropzone.el.value.length>0) {
+		createCSV(dropzone.el.value);
+	}
+}, false);
+</script>

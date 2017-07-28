@@ -1,0 +1,53 @@
+<!doctype html>
+
+<html lang="en">
+<meta charset="utf-8" />
+
+<head>
+    <title>dataTable</title>
+    <!-- jQuery   -->
+    <script src="https://code.jquery.com/jquery-git.min.js"></script>
+    <!--  Papa Parse  -->
+    <script src="CSVJSON/PapaParse/papaparse.min.js"></script>
+
+</head>
+
+<!-- Upload  -->
+
+<body style="font-family: Arial">
+    <div id="myCSV"></div>
+
+
+</body>
+
+
+<script>
+    $(document).ready(function() {
+        //start ajax request
+        var timerStart = Date.now();
+        console.log("Time Start after loading DOM ", Date.now() - timerStart);
+        $.ajax({
+            url: "Entries_1Mil.json",
+            dataType: "json",
+            success: function(data) {
+                var myCSV = Papa.unparse(data);
+                if (myCSV) {
+                    // $('#myCSV').html(myCSV);
+                    // alert("data:text/csv;charset=utf-8," + myCSV);
+                    var encodedUri = encodeURI("data:text/csv;charset=utf-8," + myCSV);
+                    var link = document.createElement("a");
+                    link.setAttribute("href", encodedUri);
+                    link.setAttribute("download", "my_data.csv");
+                    document.body.appendChild(link); // Required for FF
+
+                    link.click(); // This will download the data file named "my_data.csv".
+
+                    console.log("Success");
+                    console.log("After Loading the CSV ", Date.now() - timerStart, "ms");
+                }
+            }
+        });
+    });
+</script>
+
+</html>

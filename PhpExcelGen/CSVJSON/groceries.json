@@ -1,0 +1,7 @@
+[
+	{"Meat":"Ham","Vegetables":"Tomato","Dairy":"Milk"},
+	{"Meat":"Chicken","Vegetables":"Corn","Dairy":"Ice cream"},
+	{"Meat":"Beef","Vegetables":"Lettuce","Dairy":""},
+	{"Meat":"","Vegetables":"Peas","Dairy":""},
+	{"Meat":"","Vegetables":"Carrots","Dairy":""}
+]
