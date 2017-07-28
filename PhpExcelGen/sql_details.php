@@ -15,6 +15,6 @@ $columnArray = array(
     array( 'db' => 'Content_id',     'dt' => 'Content_id' ),
 );
 
-$myvar = " [{ 'data': 'city' },{ 'data': 'loc' },{ 'data': 'pop' },{ 'data': 'state' },{ 'data': '_id' },{ 'data': 'Content_id' },];";
 
 ?>
+

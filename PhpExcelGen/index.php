@@ -2,6 +2,7 @@
 
 require_once "../Classes/PHPExcel.php";
 include 'importExcel.php';
+include 'exportexcel.php';
 include 'exportcsv.php';
 
 ?>
@@ -63,7 +64,7 @@ include 'exportcsv.php';
                         <table class='table table-striped' id='datatable'>
                             <thead>
                                 <tr>
-                                  <?php
+                                    <?php
                                         
                                         foreach($columnArray as $dt => $dt_index){
                                             foreach($dt_index as $dt => $dt_index_val){
@@ -89,9 +90,17 @@ include 'exportcsv.php';
                 <!--  DOM saving  -->
                 <button id='SaveTable' class='btn btn-success' disabled>Save</button>
                 <hr>
+                <div class="col-md-6">
                 <form action="#" method="post">
                     <button id='SaveTable' class='btn btn-success' type="submit" name="exp">Download to CSV</button>
                 </form>
+                </div>
+
+                <div class="col-md-6">
+                <form action="#" method="post">
+                <button id='SaveTable' class='btn btn-success' type="submit" name="exp_csv">Download to Excel</button>
+                </form>
+                </div>
 
                 <hr>
 
@@ -111,7 +120,7 @@ include 'exportcsv.php';
                 <hr><br>
                 <div class="row">
                     <div class="col-md-12">
-                            <?php echo $value;?>
+                        <?php echo $value;?>
                     </div>
                 </div>
             </div>
@@ -124,14 +133,28 @@ include 'exportcsv.php';
 
 
     </body>
-<script>
-    function valueJSON(value) {
-        return value;
-    }
+    <script>
+        var columns_table = "[";
+    
+    <?php
+            foreach($columnArray as $dt => $dt_index){
+                    foreach($dt_index as $dt => $dt_index_val){
+                        if($dt == 'dt'){
+                           echo "columns_table += '{\"data\":';";
+                           echo "columns_table += '"
+                           ."\""
+                           .(string)$dt_index_val ."\""
+                           ."';";
+                           echo "columns_table += '},';";
+                        }
+                    }
+                }
+?>
+         columns_table = columns_table.slice(0, - 1);
+   
+         columns_table += "]";
 
-valueJSON(<?php echo json_decode($myvar)?>);
-
-</script>
-
-
+       
+    </script>
+    
     </html>

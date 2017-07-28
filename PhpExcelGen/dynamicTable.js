@@ -2,7 +2,7 @@ $(document).ready(function() {
     //adding buttons
 
 
-    dataVal = valueJSON;
+    var Columns_json = JSON.parse(columns_table);
     //datatable
     var table = $('#datatable').DataTable({
         // scrollX: true,
@@ -34,12 +34,7 @@ $(document).ready(function() {
             }
 
         ],
-        columns: dataVal,
-        "fnPreDrawCallback": function() {
-            // gather info to compose a message
-
-            return true;
-        },
+        columns: Columns_json,
         //When table is fully loaded
         "initComplete": function(settings, json) {
 
